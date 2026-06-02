@@ -1,0 +1,118 @@
+{
+  "about": {
+    "name": "Yogesh Kumar Saxena",
+    "age": "20",
+    "role": "I am currently an undergraduate student at BITS Goa. I am pursuing Physics and Computer Science. I completed my schooling from Delhi Public School in PCM stream.",
+    "summary": "Passionate game developer and stand-up comedian, currently learning concepts and practices in marketing. Exploring concepts behind the making of custom artificial intelligences"
+  },
+  "contact": {
+    "email": "saxenayogesh459@gmail.com",
+    "github": "https://github.com/Yogi123-des",
+    "linkedin": "https://www.linkedin.com/in/yogesh-saxena-610049206/"
+  },
+  "skills": [
+    "Unity Engine (C# language), Numpy, Matplotlib, Scipy, QISKIT, C, React.js, Next.js, AutoCAD, Public Speaking, Video Editing"
+  ],
+  "project 1": [
+    {
+      "title": "Axel Platformer",
+      "description": "A 2D platformer about a character AXEL with challenging level design",
+      "techStack": "UNITY engine and C#",
+      "liveLink": "https://yogesh123.itch.io/axel"
+    }
+  ],
+  "project 2": [
+    {
+        "title": "Quantum Particle in a 2D box",
+        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots the wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle",
+        "techStack": "Numpy, Scipy and matplotlib (Python)",
+        "GitHub Link": "https://github.com/Yogi123-des/Quantum-Particle-in-a-Box"
+    }
+  ],
+  "project 3": [
+    {
+        "title": "Quantum Counting using Grover's algorithm and Quantum Phase Estimation",
+        "description": "This project implements the Quantum Counting algorithm, combining Grover's Search with Quantum Phase Estimation to statistically estimate the number of marked items in a database.",
+        "techStack": "Numpy and QISKIT (Python)",
+        "GitHub Link": "https://github.com/Yogi123-des/Quantum-Counting-using-Grover-s-Algorithm-and-Quantum-Phase-Estimation"
+    }
+  ],
+  "project 4":[
+    {
+        "title": "Resume AI Co-Pilot",
+        "description": "An intelligent, data-grounded chatbot profile that acts as an interactive career assistant with voice integration capabilities.",
+        "techStack": ["Next.js", "OpenAI API", "Tailwind CSS", "React.js", "Web Speech API"],
+        "liveLink": "https://your-portfolio.vercel.app"
+    }
+  ],
+  "project 5":[
+    {
+        "description": "A project on ideal gas simulation is also being made as we speak.",
+        "techStack": "Numpy, Scipy and matplotlib (Python)"
+    }
+  ],
+  "work experience 1": [
+    {
+      "role": "Marketing Automation Intern",
+      "company": "Caarya",
+      "duration": "May 2026 - present",
+      "highlights": [
+        "learning skills related to marketing and substack",
+        "Automating the marketing funnel from top to bottom using custom AI."
+      ]
+    }
+  ],
+  "work experience 2": [
+    {
+        "role": "Chief Co-ordinator",
+        "club": "Fun Unlimited Comedy Club (BITS Goa)",
+        "duration": "April 2026 - present",
+        "highlights":[
+            "leading teams to completion of feature films and comedy related projects"
+        ]
+    }
+  ],
+  "work experience 3": [
+    {
+        "role": "Core member",
+        "Club": "Developers Society BITS Goa",
+        "duration": "August 2025 - April 2026",
+        "highlights":[
+            "developed multiplayer platformers and interactive escape room video games under the game dev vertical"
+        ]
+    }
+  ],
+  "volunteering experience":[
+    {
+        "role": "Mentor",
+        "Organisation": "Peer Mentorship Program (PMP BITS Goa)",
+        "duration": "July 2025 - May 2026",
+        "highlights":[
+            "Mentored many freshers at BITS Goa through their first year"
+        ]
+    }
+  ],
+  "education": [
+    {
+      "11th": "I took PCM (Physics, Chemistry and Mathematics) in 11th.",
+      "12th": "96 percent",
+      "degree": "Masters of Science in Physics and Bachelors of Engineering in Computer Science",
+      "institution": "BITS Pilani KK Birla Goa Campus",
+      "year": "2024 - 2029"
+    }
+  ],
+  "sampleQA": [
+    {
+      "question": "What is your main programming language?",
+      "answer": "My primary programming langauge currently that i am most comfortable with is PYTHON."
+    },
+    {
+      "question": "Do you have experience with AI integration?",
+      "answer": "Yes, I built this portfolio copilot utilizing the OpenAI API, implementing strict system prompts to eliminate hallucinations and handle unexpected user questions gracefully."
+    },
+    {
+      "question": "What are some transferable skills you have?",
+      "answer": "Some transferable skills that I have learned are the art of public speaking and the quailties related to leadership and teamwork during my time at Developers Society BITS Goa and Fun Unlimited Comedy Club."
+    }
+  ]
+}
