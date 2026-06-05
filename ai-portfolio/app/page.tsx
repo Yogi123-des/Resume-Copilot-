@@ -159,8 +159,8 @@ export default function Home() {
             
             {/* Contact Grid Section */}
             <div className="flex flex-col gap-2 mt-6 max-w-md">
-               <div className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300 text-sm cursor-default">
-                  <MailIcon size={16} className="text-indigo-400" />
+               <div className="flex items-center gap-2 px-4 py-2 bg-stone-900 border border-amber-800 rounded-lg text-orange-300 text-sm cursor-default">
+                  <MailIcon size={16} className="text-orange-400" />
                   <span>{profileData.contact.email || "saxenayogesh459@gmail.com"}</span>
                </div>
                <div className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-300 text-sm cursor-default">
