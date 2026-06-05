@@ -48,7 +48,7 @@ export default function Home() {
 
   const [isListening, setIsListening] = useState(false);
 
-
+  const [activeTab, setActiveTab] = useState('skills');
 
   const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -280,7 +280,7 @@ export default function Home() {
 
      
 
-      {/* ================= LEFT PROFILE GRID ================= */}
+      {/* LEFT PROFILE GRID */}
 
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-between bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
 
@@ -376,223 +376,161 @@ export default function Home() {
 
           <hr className="border-slate-800 my-6" />
 
+          {/*TAB NAVIGATION */}
+          <div className="flex gap-1 mb-6 overflow-x-auto pb-2 custom-scrollbar border-b border-slate-800">
+            {[
+              { id: 'skills', icon: Code, label: 'Skills' },
+              { id: 'projects', icon: Briefcase, label: 'Projects' },
+              { id: 'experience', icon: GraduationCap, label: 'Experience' },
+              { id: 'volunteering', icon: HeartHandshake, label: 'Volunteering' },
+              { id: 'education', icon: User, label: 'Education' }
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
+                  activeTab === tab.id
+                    ? 'text-sky-400 border-sky-400 bg-sky-500/5'
+                    : 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-slate-800/30'
+                }`}
+              >
+                <tab.icon size={14} />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* TAB CONTENT AREA */}
+          <div className="min-h-[400px]"></div>
+
 
 
           {/* Core TechStack Section */}
 
-          <div className="mb-10">
-
-            <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
-
-              <Code size={14} className="text-sky-400" /> Core TechStack and Other Skills
-
-            </h2>
-
-            <div className="flex flex-wrap gap-2">
-
-              {parsedSkills.map((skill, index) => (
-
-                <span key={index} className="px-3 py-1.5 bg-slate-950/50 border border-slate-800 text-slate-300 rounded-md text-xs font-mono">
-
-                  {skill}
-
-                </span>
-
-              ))}
-
+          {activeTab === 'skills' && (
+            <div className="mb-10 animate-fade-in">
+              <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
+                <Code size={14} className="text-sky-400" /> Core TechStack and Other Skills
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {parsedSkills.map((skill, index) => (
+                  <span key={index} className="px-3 py-1.5 bg-slate-950/50 border border-slate-800 text-slate-300 rounded-md text-xs font-mono">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-
-          </div>
-
+          )}
 
 
           {/* Technical & Scientific Projects */}
 
-          <div className="mb-10">
-
-            <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
-
-              <Briefcase size={14} className="text-sky-400" /> Technical & Scientific Projects
-
-            </h2>
-
-            <div className="space-y-4">
-
-              {compiledProjects.map((proj, idx) => {
-
-                const projectLink = (proj as any).liveLink || (proj as any)["GitHub Link"];
-
-                return (
-
-                  <div key={idx} className="p-5 bg-gradient-to-b from-slate-950/40 to-slate-950/10 border border-slate-800 rounded-xl hover:border-slate-700 transition-all">
-
-                    <div className="flex justify-between items-baseline">
-
-                      <h3 className="font-semibold text-white text-sm">{proj.title}</h3>
-
-                      {projectLink && (
-
-                        <a href={projectLink} target="_blank" rel="noreferrer" className="text-xs text-sky-400 hover:underline">
-
-                          Link →
-
-                        </a>
-
-                      )}
-
+          {activeTab === 'projects' && (
+            <div className="mb-10 animate-fade-in">
+              <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
+                <Briefcase size={14} className="text-sky-400" /> Technical & Scientific Projects
+              </h2>
+              <div className="space-y-4">
+                {compiledProjects.map((proj, idx) => {
+                  const projectLink = (proj as any).liveLink || (proj as any)["GitHub Link"];
+                  return (
+                    <div key={idx} className="p-5 bg-gradient-to-b from-slate-950/40 to-slate-950/10 border border-slate-800 rounded-xl hover:border-slate-700 transition-all">
+                      <div className="flex justify-between items-baseline">
+                        <h3 className="font-semibold text-white text-sm">{proj.title}</h3>
+                        {projectLink && (
+                          <a href={projectLink} target="_blank" rel="noreferrer" className="text-xs text-sky-400 hover:underline">
+                            Link →
+                          </a>
+                        )}
+                      </div>
+                      <p className="text-slate-300 text-xs mt-2 leading-relaxed">{proj.description}</p>
+                      
+                      <div className="flex flex-wrap gap-1.5 mt-3">
+                        {Array.isArray(proj.techStack) ? (
+                          proj.techStack.map((tech, i) => (
+                            <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-slate-900 border border-slate-950 text-slate-300 rounded">{tech}</span>
+                          ))
+                        ) : (
+                          proj.techStack && proj.techStack.split(',').map((tech, i) => (
+                            <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-slate-900 border border-slate-950 text-slate-300 rounded">{tech.trim()}</span>
+                          ))
+                        )}
+                      </div>
                     </div>
-
-                    <p className="text-slate-300 text-xs mt-2 leading-relaxed">{proj.description}</p>
-
-                   
-
-                    <div className="flex flex-wrap gap-1.5 mt-3">
-
-                      {Array.isArray(proj.techStack) ? (
-
-                        proj.techStack.map((tech, i) => (
-
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-slate-900 border border-slate-950 text-slate-300 rounded">{tech}</span>
-
-                        ))
-
-                      ) : (
-
-                        proj.techStack && proj.techStack.split(',').map((tech, i) => (
-
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-slate-900 border border-slate-950 text-slate-300 rounded">{tech.trim()}</span>
-
-                        ))
-
-                      )}
-
-                    </div>
-
-                  </div>
-
-                );
-
-              })}
-
+                  );
+                })}
+              </div>
             </div>
-
-          </div>
-
-
+          )}
 
           {/* Work & Leadership Experience */}
 
-          <div className="mb-10">
-
-            <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
-
-              <GraduationCap size={14} className="text-sky-400" /> Work & Leadership Experience
-
-            </h2>
-
-            <div className="space-y-4">
-
-              {compiledExperience.map((exp, idx) => (
-
-                <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
-
-                  <div className="flex justify-between items-baseline flex-wrap gap-1">
-
-                    {/* Headings and subheadings now use absolute pristine white layout */}
-
-                    <h3 className="font-semibold text-white text-sm">
-
-                      {exp.role} <span className="text-white font-normal">at {exp.source}</span>
-
-                    </h3>
-
-                    {/* Timeline positions flipped uniformly to white */}
-
-                    <span className="text-xs font-mono text-white font-medium">{exp.duration}</span>
-
+          {activeTab === 'experience' && (
+            <div className="mb-10 animate-fade-in">
+              <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
+                <GraduationCap size={14} className="text-sky-400" /> Work & Leadership Experience
+              </h2>
+              <div className="space-y-4">
+                {compiledExperience.map((exp, idx) => (
+                  <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
+                    <div className="flex justify-between items-baseline flex-wrap gap-1">
+                      <h3 className="font-semibold text-white text-sm">
+                        {exp.role} <span className="text-white font-normal">at {exp.source}</span>
+                      </h3>
+                      <span className="text-xs font-mono text-white font-medium">{exp.duration}</span>
+                    </div>
+                    <ul className="list-disc list-inside text-slate-300 text-xs mt-2 space-y-1 pl-0.5">
+                      {exp.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
+                    </ul>
                   </div>
-
-                  <ul className="list-disc list-inside text-slate-300 text-xs mt-2 space-y-1 pl-0.5">
-
-                    {exp.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
-
-                  </ul>
-
-                </div>
-
-              ))}
-
+                ))}
+              </div>
             </div>
-
-          </div>
-
-
+          )}
 
           {/* Volunteering Section */}
 
-          <div className="mb-6">
-
-            <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
-
-              <HeartHandshake size={14} className="text-sky-400" /> Peer & Social Volunteering
-
-            </h2>
-
-            {profileData["volunteering experience"].map((vol, idx) => (
-
-              <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
-
-                <div className="flex justify-between items-baseline flex-wrap gap-1">
-
-                  <h3 className="font-semibold text-white text-sm">
-
-                    {vol.role} <span className="text-white font-normal">for {(vol as any).Organisation}</span>
-
-                  </h3>
-
-                  <span className="text-xs font-mono text-white font-medium">{vol.duration}</span>
-
+          {activeTab === 'volunteering' && (
+            <div className="mb-6 animate-fade-in">
+              <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
+                <HeartHandshake size={14} className="text-sky-400" /> Peer & Social Volunteering
+              </h2>
+              {profileData["volunteering experience"].map((vol, idx) => (
+                <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
+                  <div className="flex justify-between items-baseline flex-wrap gap-1">
+                    <h3 className="font-semibold text-white text-sm">
+                      {vol.role} <span className="text-white font-normal">for {(vol as any).Organisation}</span>
+                    </h3>
+                    <span className="text-xs font-mono text-white font-medium">{vol.duration}</span>
+                  </div>
+                  <ul className="list-disc list-inside text-slate-300 text-xs mt-2 pl-0.5">
+                    {vol.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
+                  </ul>
                 </div>
-
-                <ul className="list-disc list-inside text-slate-300 text-xs mt-2 pl-0.5">
-
-                  {vol.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
-
-                </ul>
-
-              </div>
-
-            ))}
-
-          </div>
+              ))}
+            </div>
+          )}
 
 
 
           {/* Academic Profile Track */}
 
-          <div className="mb-6 pt-4 border-t border-slate-800">
-
-            <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-3 uppercase tracking-wider">
-
-              Education Status
-
-            </h2>
-
-            {profileData.education.map((edu, idx) => (
-
-              <div key={idx} className="text-xs">
-
-                <p className="font-semibold text-white">{edu.degree}</p>
-
-                <p className="text-slate-300 mt-0.5">{edu.institution} | <span className="text-white font-mono">{edu.year}</span></p>
-
-              </div>
-
-            ))}
-
-          </div>
-
-        </div>
+         {activeTab === 'education' && (
+            <div className="mb-6 pt-4 border-t border-slate-800 animate-fade-in">
+              <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-3 uppercase tracking-wider">
+                Education Status
+              </h2>
+              {profileData.education.map((edu, idx) => (
+                <div key={idx} className="text-xs">
+                  <p className="font-semibold text-white">{edu.degree}</p>
+                  <p className="text-slate-300 mt-0.5">{edu.institution} | <span className="text-white font-mono">{edu.year}</span></p>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          </div> {/* <--- This closes the min-h-[400px] TAB CONTENT AREA div we opened in Change 1 */}
+        <div/>
 
 
 
@@ -602,7 +540,7 @@ export default function Home() {
 
 
 
-      {/* ================= RIGHT INTERACTIVE AGENT ================= */}
+      {/*RIGHT INTERACTIVE AGENT */}
 
       <section className="w-full md:w-1/2 flex flex-col bg-slate-900/60 md:h-screen">
 
