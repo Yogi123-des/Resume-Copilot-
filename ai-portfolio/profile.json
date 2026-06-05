@@ -17,7 +17,7 @@
   "project 1": [
     {
       "title": "Axel Platformer",
-      "description": "A 2D platformer about a character AXEL with challenging level design (My very first project)",
+      "description": "A 2D platformer about a character AXEL with challenging level design (My very first project), the mechanics were completely made by me, also the level designs were completely made by me.",
       "techStack": "UNITY engine and C#",
       "liveLink": "https://yogesh123.itch.io/axel"
     }
@@ -25,7 +25,7 @@
   "project 2": [
     {
         "title": "Quantum Particle in a 2D box",
-        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots the wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle",
+        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots a preset given wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle. it also plots parametric curve of Delta x and Delta p as the wavefunction changes.",
         "techStack": "Numpy, Scipy and matplotlib (Python)",
         "GitHub Link": "https://github.com/Yogi123-des/Quantum-Particle-in-a-Box"
     }
