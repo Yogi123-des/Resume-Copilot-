@@ -141,14 +141,14 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-emerald-500/30">
+    <main className="min-h-screen bg-zinc-950 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-amber-500/30">
       
       {/* ================= LEFT PROFILE GRID ================= */}
-      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800/60 custom-scrollbar md:h-screen flex flex-col justify-between">
+      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-zinc-800/60 custom-scrollbar md:h-screen flex flex-col justify-between">
         <div>
           {/* Main Context Card Header */}
           <div className="mb-10 animate-fade-in">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
