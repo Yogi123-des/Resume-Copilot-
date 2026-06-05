@@ -391,15 +391,29 @@ export default function Home() {
               </div>
             </div>
           )}
-         {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
+          {/* --- SUGGESTED QUESTIONS PILLS --- */}
+{messages.length === 1 && !isLoading && (
+  <div className="flex flex-wrap gap-2 pt-2 animate-bubble-entry delay-300">
+    {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
       <button
         key={idx}
-        onClick={() => sendMessage(item.question)}
-        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 hover:bg-sky-500/5 text-sky-400/80 hover:text-sky-300 rounded-full transition-all text-left shadow-sm"
+        onClick={async () => {
+          // 1. Pop the question text into the input field text box
+          setInput(item.question);
+          
+          // 2. Give React a split millisecond to update state, then fire your message handler
+          setTimeout(() => {
+            const simulatedEvent = { preventDefault: () => {} } as React.FormEvent;
+            handleSendMessage(simulatedEvent);
+          }, 50);
+        }}
+        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 text-sky-400/80 rounded-full transition-all text-left cursor-pointer"
       >
         {item.question}
       </button>
     ))}
+  </div>
+)}
 
           <div ref={chatEndRef} />
         </div>
