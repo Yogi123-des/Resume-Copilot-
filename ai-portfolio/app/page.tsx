@@ -71,7 +71,7 @@ export default function Home() {
     }
   ];
 
-  // --- BROWSER AUDIO SYSTEM (WEB SPEECH API - INPUT) ---
+  // --- BROWSER AUDIO SYSTEM (WEB SPEECH API) ---
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
@@ -108,7 +108,6 @@ export default function Home() {
     }
   };
 
-  // --- CORE CONVERSATION HANDLING & AUDIO RESPONSES ---
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -129,44 +128,22 @@ export default function Home() {
 
       if (!response.ok) throw new Error("Failed to contact API backend route");
       const data = await response.json();
-      
-      
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
-
-     
-      if (data.audio) {
-       
-        const audio = new Audio(data.audio);
-        audio.play().catch(err => console.error("Audio stream playback was interrupted:", err));
-      } else if ('speechSynthesis' in window) {
-        
-        window.speechSynthesis.cancel(); 
-        const utterance = new SpeechSynthesisUtterance(data.reply);
-        
-        utterance.rate = 1.0; 
-        utterance.pitch = 1.0;
-        
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en'));
-        if (englishVoice) utterance.voice = englishVoice;
-
-        window.speechSynthesis.speak(utterance);
-      }
-
     } catch (error) {
       setMessages(prev => [...prev, { role: 'assistant', content: "System communication latency error: Check your backend router log execution traces." }]);
-    } finally{
+    } finally {
       setIsLoading(false);
     }
   };
 
   return (
+    // Transformed global background from stone to cool, soothing slate dark tones
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-sky-500/20">
-      
       
       {/* ================= LEFT PROFILE GRID ================= */}
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-between bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
         <div>
+          {/* Main Context Card Header */}
           <div className="mb-10 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-500/10 border border-sky-500/20 rounded-full text-sky-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
@@ -177,6 +154,7 @@ export default function Home() {
             <p className="text-lg text-sky-400 mt-2 font-medium leading-normal">{profileData.about.role}</p>
             <p className="text-slate-300 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
+            {/* Contact Grid Section */}
             <div className="flex flex-col gap-2 mt-6 max-w-md">
                <div className="flex items-center gap-2 px-4 py-2 bg-slate-950/40 border border-slate-800 rounded-lg text-slate-300 text-sm cursor-default">
                   <MailIcon size={16} className="text-sky-400" />
@@ -271,9 +249,11 @@ export default function Home() {
               {compiledExperience.map((exp, idx) => (
                 <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
                   <div className="flex justify-between items-baseline flex-wrap gap-1">
+                    {/* Headings and subheadings now use absolute pristine white layout */}
                     <h3 className="font-semibold text-white text-sm">
                       {exp.role} <span className="text-white font-normal">at {exp.source}</span>
                     </h3>
+                    {/* Timeline positions flipped uniformly to white */}
                     <span className="text-xs font-mono text-white font-medium">{exp.duration}</span>
                   </div>
                   <ul className="list-disc list-inside text-slate-300 text-xs mt-2 space-y-1 pl-0.5">
