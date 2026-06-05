@@ -23,7 +23,7 @@ A smart, client-facing interactive portfolio copilot. This website transforms a 
 
 ### System Architecture Flow
 1. **User Interface Interaction:** A multi-tab layout displays Core Skills, Projects, Experience, Volunteering, and Education status.
-2. **Contextual Ingestion:** When a user prompts a question, the website grabs my resume info from (`profile.json`), glues it to the prompt, and sends the whole package to OpenAI so the AI knows I am.
+2. **Contextual Ingestion:** When a user prompts a question, the website grabs my resume info from (`profile.json`), glues it to the prompt, and sends the whole package to GroqAI using an API so the AI knows who I am.
 3. **Guardrail Evaluation:** The AI checks if it actually knows the answer based on my resume. If a user asks something completely random the AI doesn't make things up, it juts says to the user to contact me.
 
 ---
@@ -57,3 +57,16 @@ Below are some Q&A pairs used to validate system performance under strict bounda
 - **Answer** As a Mentor at the Peer Mentorship Program (PMP) BITS Goa, my role involved guiding and supporting many freshers at BITS Goa throughout their first year.
 
 ---
+## 🧩 Challenges Overcome & Future Plans
+
+### Challenges I Faced (and Fixed)
+
+*   **Handling Messy Data Formats:** In `profile.json`, different work history entries used different words for the same thing (like using `company` for one job and `Club` for another). This caused TypeScript errors. I fixed this by creating a uniform data wrapper that normalizes the properties before sending them to the UI components.
+*   **Fixing Slow Clicks on Suggested Questions:** Originally, clicking a suggested question box didn't trigger an immediate message because the website was waiting for the input field to update first. I re-structure the function so clicking a box bypasses the input field and sends the question straight to the API.
+*   **Stopping AI Hallucinations:** It was tricky making sure the AI didn't start making up fake projects or jobs. I fixed this by using strict system prompts (setting the GroqAI API "temperature" closer to 0) and adding a fallback instruction: *If the answer isn't in the provided text, politely say you don't know.*
+
+### Future Plans
+
+*   **Switch to a Real RAG Pipeline:** Right now, the app reads your entire resume from a single JSON file. In the future, I plan to use a vector database (like Supabase PGVector) to store longer documents (like full college research papers or project reports) so the AI can search through them and answer in a more nuanced manner.
+*   **Add Live Links to Answers:** Modify the AI backend so that when it mentions a project (like the *Ideal Gas Simulation*), it automatically embeds a working hyperlink directly inside the chat response so recruiters can click it instantly.
+*   **Scaling into a Platform:** Instead of just keeping this as my personal portfolio, the ultimate vision is to scale this into a "Copilot-as-a-Service" platform where any developer or job-seeker can generate their own interactive AI agent instantly.
