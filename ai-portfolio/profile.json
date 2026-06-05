@@ -17,7 +17,7 @@
   "project 1": [
     {
       "title": "Axel Platformer",
-      "description": "A 2D platformer about a character AXEL with challenging level design",
+      "description": "A 2D platformer about a character AXEL with challenging level design (My very first project)",
       "techStack": "UNITY engine and C#",
       "liveLink": "https://yogesh123.itch.io/axel"
     }
@@ -104,18 +104,24 @@
       "year": "2024 - 2029"
     }
   ],
-  "sampleQA": [
+  "sampleQ": [
     {
-      "question": "What is your main programming language?",
-      "answer": "My primary programming langauge currently that i am most comfortable with is PYTHON."
+      "question": "Do you have experience with AI integration?"
     },
     {
-      "question": "Do you have experience with AI integration?",
-      "answer": "Yes, I built this portfolio copilot utilizing the OpenAI API, implementing strict system prompts to eliminate hallucinations and handle unexpected user questions gracefully."
+      "question": "What are some transferable skills you have?"
     },
     {
-      "question": "What are some transferable skills you have?",
-      "answer": "Some transferable skills that I have learned are the art of public speaking and the quailties related to leadership and teamwork during my time at Developers Society BITS Goa and Fun Unlimited Comedy Club."
+      "question": "What is your current GPA?"
+    },
+    {
+      "question": "Can you tell me more about your Quantum Counting project and theory behind it?"
+    },
+    {
+      "question": "According to you, What makes you stand out?"
+    },
+    {
+      "question": "How much did you score in 12th board exams?"
     }
   ]
 }

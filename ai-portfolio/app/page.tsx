@@ -184,7 +184,7 @@ export default function Home() {
 
           <hr className="border-slate-800 my-6" />
 
-          {/* ================= TAB NAVIGATION ================= */}
+          {/* TAB NAVIGATION */}
           <div className="flex gap-1 mb-6 overflow-x-auto pb-2 custom-scrollbar border-b border-slate-800">
             {[
               { id: 'skills', icon: Code, label: 'Skills' },
@@ -208,7 +208,7 @@ export default function Home() {
             ))}
           </div>
 
-          {/* ================= TAB CONTENT AREA ================= */}
+          {/*TAB CONTENT AREA */}
           <div className="min-h-[400px]">
             
             {/* Core TechStack Section */}
@@ -327,7 +327,7 @@ export default function Home() {
               </div>
             )}
 
-          </div> {/* <-- End of Tab Content Area */}
+          </div> {/*End of Tab Content Area */}
         </div>
 
         <p className="text-[10px] text-slate-500 font-mono mt-auto pt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
@@ -384,6 +384,19 @@ export default function Home() {
               </div>
             </div>
           )}
+          {messages.length === 1 && !isLoading && profileData?.sampleQ && (
+<div className="flex flex-wrap gap-2 pt-2 animate-fade-in">
+    {profileData.sampleQ.map((item, idx) => (
+      <button
+        key={idx}
+        onClick={() => setInput(item.question)}
+        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 hover:bg-sky-500/5 text-sky-400/80 hover:text-sky-300 rounded-full transition-all text-left shadow-sm"
+      >
+        {item.question}
+      </button>
+    ))}
+  </div>
+)}
           <div ref={chatEndRef} />
         </div>
 
