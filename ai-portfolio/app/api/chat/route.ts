@@ -6,7 +6,7 @@ import profileData from '../../../profile.json';
 
 
 
-// Initialize the OpenAI client using your environment variable key
+
 
 const groq = new Groq({
 
@@ -20,19 +20,15 @@ export async function POST(req: Request) {
 
   try {
 
-    // Parse out the incoming history of conversation messages from the frontend UI
+    
 
     const { messages } = await req.json();
 
 
 
-    // Convert your profile data to a formatted text string for the AI context window
 
     const contextString = JSON.stringify(profileData, null, 2);
 
-
-
-    // Prompt Engineering: Set up absolute guardrails to ground your AI Copilot
 
     const systemPrompt = {
 
@@ -66,13 +62,10 @@ ${contextString}`
 
 
 
-    // Combine your custom rules with the running conversation logs
-
     const finalMessages = [systemPrompt, ...messages];
 
 
 
-    // Fire the call off to OpenAI using their highly efficient gpt-4o-mini model
 
     const response = await groq.chat.completions.create({
 
@@ -80,7 +73,7 @@ ${contextString}`
 
       messages: finalMessages,
 
-      temperature: 0.4, // Set ultra-low to maximize deterministic matching instead of creative freedom
+      temperature: 0.4, 
 
     });
 
