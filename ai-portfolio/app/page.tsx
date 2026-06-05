@@ -145,6 +145,10 @@ export default function Home() {
       {/* LEFT PROFILE GRID */}
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-start bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
         <div>
+          <div className="animate-fluid-entry">
+            <h1 className="text-5xl font-bold text-white">Yogesh Kumar Saxena</h1>
+            <p className="text-sky-400 mt-2">I am currently an undergraduate student...</p>
+          </div>
           {/* Main Context Card Header */}
           <div className="mb-10 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-500/10 border border-sky-500/20 rounded-full text-sky-400 text-xs font-medium mb-4">
@@ -157,6 +161,8 @@ export default function Home() {
             <p className="text-slate-300 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
             {/* Contact Grid Section */}
+            <div className="space-y-2 mt-6 animate-fluid-entry delay-100">
+            </div>
             <div className="flex flex-col gap-2 mt-6 max-w-md">
                <div className="flex items-center gap-2 px-4 py-2 bg-slate-950/40 border border-slate-800 rounded-lg text-slate-300 text-sm cursor-default">
                   <MailIcon size={16} className="text-sky-400" />
@@ -217,7 +223,9 @@ export default function Home() {
 
           {/*TAB CONTENT AREA */}
           <div className="min-h-[400px]">
-            
+            <div className="flex gap-2 border-b border-slate-800 pb-2 mt-8 animate-fluid-entry delay-200">
+              
+            </div>
             {/* Core TechStack Section */}
             {activeTab === 'skills' && (
               <div className="mb-10 animate-fade-in">
@@ -391,18 +399,18 @@ export default function Home() {
               </div>
             </div>
           )}
-          {messages.length === 1 && !isLoading && profileData?.sampleQ && (
-<div className="flex flex-wrap gap-2 pt-2 animate-fade-in">
+ 
+  {messages.length === 1 && !isLoading && (
+  <div className="flex flex-wrap gap-2 pt-2 animate-bubble-entry delay-300">
     {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
       <button
         key={idx}
         onClick={() => sendMessage(item.question)}
-        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 hover:bg-sky-500/5 text-sky-400/80 hover:text-sky-300 rounded-full transition-all text-left shadow-sm"
+        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 text-sky-400/80 rounded-full transition-all text-left"
       >
         {item.question}
       </button>
     ))}
-   
   </div>
 )}
           <div ref={chatEndRef} />
