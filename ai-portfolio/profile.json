@@ -25,7 +25,7 @@
   "project 2": [
     {
         "title": "Quantum Particle in a 2D box",
-        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots a preset given wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle. it also plots parametric curve of Delta x and Delta p as the wavefunction changes.",
+        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots a preset given wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle. it also plots parametric curve of Δ x and Δ p as the wavefunction changes.",
         "techStack": "Numpy, Scipy and matplotlib (Python)",
         "GitHub Link": "https://github.com/Yogi123-des/Quantum-Particle-in-a-Box"
     }
