@@ -310,13 +310,13 @@ export default function Home() {
         <div className="p-4 border-b border-amber-800/60 bg-stone-950/40 flex items-center justify-between backdrop-blur-sm">
           <div className="flex items-center gap-3">
             {/* Updated bot frame color tokens */}
-            <div className="w-8 h-8 rounded-full bg-orange-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
+            <div className="w-8 h-8 rounded-full bg-yellow-500/10 border border-amber-500/30 flex items-center justify-center text-orange-400 shadow-inner">
               <Bot size={16} />
             </div>
             <div>
-              <h2 className="text-xs font-semibold text-zinc-100">Yogesh's AI Assistant</h2>
-              <p className="text-[10px] text-indigo-400 flex items-center gap-1 mt-0.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span> Anti-Hallucination Guardrails Active
+              <h2 className="text-xs font-semibold text-orange-100">Yogesh's AI Assistant</h2>
+              <p className="text-[10px] text-orange-400 flex items-center gap-1 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span> Anti-Hallucination Guardrails Active
               </p>
             </div>
           </div>
