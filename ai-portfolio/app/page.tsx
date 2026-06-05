@@ -304,13 +304,13 @@ export default function Home() {
       </section>
 
       {/* ================= RIGHT INTERACTIVE AGENT ================= */}
-      <section className="w-full md:w-1/2 flex flex-col bg-zinc-900/30 md:h-screen">
+      <section className="w-full md:w-1/2 flex flex-col bg-stone-900/30 md:h-screen">
         
         {/* Banner Status Frame */}
-        <div className="p-4 border-b border-zinc-800/60 bg-zinc-950/40 flex items-center justify-between backdrop-blur-sm">
+        <div className="p-4 border-b border-amber-800/60 bg-stone-950/40 flex items-center justify-between backdrop-blur-sm">
           <div className="flex items-center gap-3">
             {/* Updated bot frame color tokens */}
-            <div className="w-8 h-8 rounded-full bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
+            <div className="w-8 h-8 rounded-full bg-orange-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-inner">
               <Bot size={16} />
             </div>
             <div>
