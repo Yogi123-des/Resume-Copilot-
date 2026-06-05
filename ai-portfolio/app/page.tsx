@@ -130,17 +130,17 @@ export default function Home() {
       if (!response.ok) throw new Error("Failed to contact API backend route");
       const data = await response.json();
       
-      // 1. Output the text message to the UI
+      
       setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
 
-      // 2. TRIGGER AUDIO PLAYBACK
+     
       if (data.audio) {
-        // Method A: Premium Server Voice (If route.ts returns a base64 audio string)
+       
         const audio = new Audio(data.audio);
         audio.play().catch(err => console.error("Audio stream playback was interrupted:", err));
       } else if ('speechSynthesis' in window) {
-        // Method B: Free Browser Fallback (If route.ts returns text only)
-        window.speechSynthesis.cancel(); // Mute any response currently speaking
+        
+        window.speechSynthesis.cancel(); 
         const utterance = new SpeechSynthesisUtterance(data.reply);
         
         utterance.rate = 1.0; 
@@ -162,6 +162,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-sky-500/20">
+      
       
       {/* ================= LEFT PROFILE GRID ================= */}
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-between bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
