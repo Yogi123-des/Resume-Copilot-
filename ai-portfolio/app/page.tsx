@@ -137,7 +137,6 @@ export default function Home() {
   };
 
   return (
-    // Base layout color lightened from stone-950 to stone-900 for a warmer tone base
     <main className="min-h-screen bg-stone-900 text-amber-100 flex flex-col md:flex-row antialiased font-sans selection:bg-amber-500/20">
       
       {/* ================= LEFT PROFILE GRID ================= */}
@@ -148,20 +147,21 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
             </div>
-            {/* Unified white/cream header text */}
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-amber-50">
               {profileData.about.name}
             </h1>
-            <p className="text-lg text-amber-400 mt-2 font-medium leading-normal">{profileData.about.role}</p>
+            {/* Softened subtitle from striking orange to a more readable amber shade */}
+            <p className="text-lg text-amber-400/90 mt-2 font-medium leading-normal">{profileData.about.role}</p>
+            {/* Tone brought to neutral stone-300 to ease eye fatigue */}
             <p className="text-stone-300 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
             {/* Contact Grid Section */}
             <div className="flex flex-col gap-2 mt-6 max-w-md">
-               <div className="flex items-center gap-2 px-4 py-2 bg-stone-950/40 border border-amber-900/60 rounded-lg text-amber-300 text-sm cursor-default">
+               <div className="flex items-center gap-2 px-4 py-2 bg-stone-950/40 border border-amber-900/60 rounded-lg text-amber-200 text-sm cursor-default">
                   <MailIcon size={16} className="text-amber-400" />
                   <span>{profileData.contact.email || "saxenayogesh459@gmail.com"}</span>
                </div>
-               <div className="flex items-center gap-2 px-4 py-2 bg-stone-950/40 border border-amber-900/60 rounded-lg text-amber-300 text-sm cursor-default">
+               <div className="flex items-center gap-2 px-4 py-2 bg-stone-950/40 border border-amber-900/60 rounded-lg text-amber-200 text-sm cursor-default">
                   <PhoneIcon size={16} className="text-amber-400" />
                   <span>{profileData.contact.phone || "+91 7017362735"}</span>
                </div>
@@ -188,7 +188,7 @@ export default function Home() {
             </div>
           </div>
 
-          <hr className="border-amber-900/60 my-6" />
+          <hr className="border-amber-900/40 my-6" />
 
           {/* Core TechStack Section */}
           <div className="mb-10">
@@ -222,16 +222,17 @@ export default function Home() {
                         </a>
                       )}
                     </div>
-                    <p className="text-amber-300/90 text-xs mt-2 leading-relaxed">{proj.description}</p>
+                    {/* Alleviated eye strain by shifting body texts to stone-300 */}
+                    <p className="text-stone-300 text-xs mt-2 leading-relaxed">{proj.description}</p>
                     
                     <div className="flex flex-wrap gap-1.5 mt-3">
                       {Array.isArray(proj.techStack) ? (
                         proj.techStack.map((tech, i) => (
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-900/80 border border-amber-950 text-amber-300 rounded">{tech}</span>
+                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-900/80 border border-amber-950 text-amber-300/90 rounded">{tech}</span>
                         ))
                       ) : (
                         proj.techStack && proj.techStack.split(',').map((tech, i) => (
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-900/80 border border-amber-950 text-amber-300 rounded">{tech.trim()}</span>
+                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-900/80 border border-amber-950 text-amber-300/90 rounded">{tech.trim()}</span>
                         ))
                       )}
                     </div>
@@ -250,12 +251,15 @@ export default function Home() {
               {compiledExperience.map((exp, idx) => (
                 <div key={idx} className="border-l-2 border-amber-800/80 pl-4 py-0.5 ml-1">
                   <div className="flex justify-between items-baseline flex-wrap gap-1">
+                    {/* Role stays distinct, company context set to soft white text */}
                     <h3 className="font-semibold text-amber-50 text-sm">
-                      {exp.role} <span className="text-amber-400 font-normal">at {exp.source}</span>
+                      {exp.role} <span className="text-amber-100/90 font-normal">at {exp.source}</span>
                     </h3>
-                    <span className="text-xs font-mono text-amber-500/90">{exp.duration}</span>
+                    {/* Date badge text flipped completely to clean white */}
+                    <span className="text-xs font-mono text-white font-medium">{exp.duration}</span>
                   </div>
-                  <ul className="list-disc list-inside text-amber-300/90 text-xs mt-2 space-y-1 pl-0.5">
+                  {/* Bullet entries shifted to comfortable reading tone */}
+                  <ul className="list-disc list-inside text-stone-300 text-xs mt-2 space-y-1 pl-0.5">
                     {exp.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
                   </ul>
                 </div>
@@ -271,12 +275,14 @@ export default function Home() {
             {profileData["volunteering experience"].map((vol, idx) => (
               <div key={idx} className="border-l-2 border-amber-800/80 pl-4 py-0.5 ml-1">
                 <div className="flex justify-between items-baseline flex-wrap gap-1">
+                  {/* Organization context turned to warm white */}
                   <h3 className="font-semibold text-amber-50 text-sm">
-                    {vol.role} <span className="text-amber-400 font-normal">for {(vol as any).Organisation}</span>
+                    {vol.role} <span className="text-amber-100/90 font-normal">for {(vol as any).Organisation}</span>
                   </h3>
-                  <span className="text-xs font-mono text-stone-400">{vol.duration}</span>
+                  {/* Volunteering dates set to absolute white */}
+                  <span className="text-xs font-mono text-white font-medium">{vol.duration}</span>
                 </div>
-                <ul className="list-disc list-inside text-amber-300/90 text-xs mt-2 pl-0.5">
+                <ul className="list-disc list-inside text-stone-300 text-xs mt-2 pl-0.5">
                   {vol.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
                 </ul>
               </div>
@@ -290,8 +296,8 @@ export default function Home() {
             </h2>
             {profileData.education.map((edu, idx) => (
               <div key={idx} className="text-xs">
-                <p className="font-semibold text-amber-100">{edu.degree}</p>
-                <p className="text-amber-500/90 mt-0.5">{edu.institution} | {edu.year}</p>
+                <p className="font-semibold text-amber-50">{edu.degree}</p>
+                <p className="text-stone-300 mt-0.5">{edu.institution} | <span className="text-white font-mono">{edu.year}</span></p>
               </div>
             ))}
           </div>
@@ -301,7 +307,6 @@ export default function Home() {
       </section>
 
       {/* ================= RIGHT INTERACTIVE AGENT ================= */}
-      {/* Blended right panel background for modern, warm uniformity */}
       <section className="w-full md:w-1/2 flex flex-col bg-stone-900/60 md:h-screen">
         
         {/* Banner Status Frame */}
@@ -311,7 +316,6 @@ export default function Home() {
               <Bot size={16} />
             </div>
             <div>
-              {/* Unified Header White/Cream Treatment */}
               <h2 className="text-xs font-semibold text-amber-50">Yogesh's AI Assistant</h2>
               <p className="text-[10px] text-amber-400 flex items-center gap-1 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> Anti-Hallucination Guardrails Active
@@ -333,8 +337,8 @@ export default function Home() {
               </div>
               <div className={`p-4 rounded-xl text-xs leading-relaxed ${
                 msg.role === 'user'
-                  // User chat block shifted to a deep sunset amber-orange for high readability
                   ? 'bg-amber-700 text-amber-50 rounded-tr-none shadow-md font-medium'
+                  // Set chat responses to clear stone-200 to maximize paragraph legibility
                   : 'bg-stone-950/40 border border-amber-900/40 text-stone-200 rounded-tl-none'
               }`}>
                 <p className="whitespace-pre-wrap">{msg.content}</p>
