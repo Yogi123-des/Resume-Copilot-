@@ -190,17 +190,17 @@ export default function Home() {
             </div>
           </div>
 
-          <hr className="border-zinc-900 my-6" />
+          <hr className="border-amber-900 my-6" />
 
           {/* Core TechStack Section */}
           <div className="mb-10">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-zinc-400 mb-4 uppercase tracking-wider">
-              <Code size={14} className="text-indigo-400" /> Core TechStack and Other Skills
+            <h2 className="text-xs font-bold flex items-center gap-2 text-orange-400 mb-4 uppercase tracking-wider">
+              <Code size={14} className="text-orange-400" /> Core TechStack and Other Skills
             </h2>
             <div className="flex flex-wrap gap-2">
               {parsedSkills.map((skill, index) => (
                 // Skill badges shifted from emerald to a cool violet tint
-                <span key={index} className="px-3 py-1.5 bg-zinc-900/80 border border-zinc-800 text-violet-300 rounded-md text-xs font-mono">
+                <span key={index} className="px-3 py-1.5 bg-stone-900/80 border border-amber-800 text-orange-300 rounded-md text-xs font-mono">
                   {skill}
                 </span>
               ))}
@@ -209,32 +209,32 @@ export default function Home() {
 
           {/* Technical & Scientific Projects */}
           <div className="mb-10">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-zinc-400 mb-4 uppercase tracking-wider">
-              <Briefcase size={14} className="text-indigo-400" /> Technical & Scientific Projects
+            <h2 className="text-xs font-bold flex items-center gap-2 text-orange-400 mb-4 uppercase tracking-wider">
+              <Briefcase size={14} className="text-orange-400" /> Technical & Scientific Projects
             </h2>
             <div className="space-y-4">
               {compiledProjects.map((proj, idx) => {
                 const projectLink = (proj as any).liveLink || (proj as any)["GitHub Link"];
                 return (
-                  <div key={idx} className="p-5 bg-gradient-to-b from-zinc-900/40 to-zinc-950 border border-zinc-900 rounded-xl hover:border-zinc-800 transition-all">
+                  <div key={idx} className="p-5 bg-gradient-to-b from-stone-900/40 to-stone-950 border border-amber-900 rounded-xl hover:border-amber-800 transition-all">
                     <div className="flex justify-between items-baseline">
                       <h3 className="font-semibold text-white text-sm">{proj.title}</h3>
                       {projectLink && (
-                        <a href={projectLink} target="_blank" rel="noreferrer" className="text-xs text-indigo-400 hover:underline">
+                        <a href={projectLink} target="_blank" rel="noreferrer" className="text-xs text-orange-400 hover:underline">
                           Link →
                         </a>
                       )}
                     </div>
-                    <p className="text-zinc-400 text-xs mt-2 leading-relaxed">{proj.description}</p>
+                    <p className="text-orange-400 text-xs mt-2 leading-relaxed">{proj.description}</p>
                     
                     <div className="flex flex-wrap gap-1.5 mt-3">
                       {Array.isArray(proj.techStack) ? (
                         proj.techStack.map((tech, i) => (
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-zinc-800 text-zinc-300 rounded">{tech}</span>
+                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-800 text-orange-300 rounded">{tech}</span>
                         ))
                       ) : (
                         proj.techStack && proj.techStack.split(',').map((tech, i) => (
-                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-zinc-800 text-zinc-300 rounded">{tech.trim()}</span>
+                          <span key={i} className="text-[10px] font-mono px-2 py-0.5 bg-stone-800 text-orange-300 rounded">{tech.trim()}</span>
                         ))
                       )}
                     </div>
