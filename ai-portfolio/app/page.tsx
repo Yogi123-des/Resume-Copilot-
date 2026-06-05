@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
@@ -108,7 +109,6 @@ export default function Home() {
     const targetMessage = textToSend || input.trim();
     if (!targetMessage || isLoading) return;
 
-    
     if (!textToSend) {
       setInput('');
     }
@@ -145,8 +145,8 @@ export default function Home() {
       {/* LEFT PROFILE GRID */}
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-start bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
         <div>
-          {/* Main Context Card Header */}
-          <div className="mb-10 animate-fade-in">
+          {/* Main Context Card Header*/}
+          <div className="mb-10 animate-fluid-entry">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-500/10 border border-sky-500/20 rounded-full text-sky-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
             </div>
@@ -157,7 +157,7 @@ export default function Home() {
             <p className="text-slate-300 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
             {/* Contact Grid Section */}
-            <div className="flex flex-col gap-2 mt-6 max-w-md">
+            <div className="flex flex-col gap-2 mt-6 max-w-md animate-fluid-entry delay-100">
                <div className="flex items-center gap-2 px-4 py-2 bg-slate-950/40 border border-slate-800 rounded-lg text-slate-300 text-sm cursor-default">
                   <MailIcon size={16} className="text-sky-400" />
                   <span>{profileData.contact.email || "saxenayogesh459@gmail.com"}</span>
@@ -192,7 +192,7 @@ export default function Home() {
           <hr className="border-slate-800 my-6" />
 
           {/* TAB NAVIGATION */}
-          <div className="flex gap-1 mb-6 overflow-x-auto pb-2 custom-scrollbar border-b border-slate-800">
+          <div className="flex gap-1 mb-6 overflow-x-auto pb-2 custom-scrollbar border-b border-slate-800 animate-fluid-entry delay-150">
             {[
               { id: 'skills', icon: Code, label: 'Skills' },
               { id: 'projects', icon: Briefcase, label: 'Projects' },
@@ -215,12 +215,12 @@ export default function Home() {
             ))}
           </div>
 
-          {/*TAB CONTENT AREA */}
-          <div className="min-h-[400px]">
+          {/* TAB CONTENT AREA*/}
+          <div className="min-h-[400px] animate-fluid-entry delay-200">
             
             {/* Core TechStack Section */}
             {activeTab === 'skills' && (
-              <div className="mb-10 animate-fade-in">
+              <div className="mb-10 animate-fluid-entry">
                 <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
                   <Code size={14} className="text-sky-400" /> Core TechStack and Other Skills
                 </h2>
@@ -236,7 +236,7 @@ export default function Home() {
 
             {/* Technical & Scientific Projects */}
             {activeTab === 'projects' && (
-              <div className="mb-10 animate-fade-in">
+              <div className="mb-10 animate-fluid-entry">
                 <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
                   <Briefcase size={14} className="text-sky-400" /> Technical & Scientific Projects
                 </h2>
@@ -275,7 +275,7 @@ export default function Home() {
 
             {/* Work & Leadership Experience */}
             {activeTab === 'experience' && (
-              <div className="mb-10 animate-fade-in">
+              <div className="mb-10 animate-fluid-entry">
                 <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
                   <GraduationCap size={14} className="text-sky-400" /> Work & Leadership Experience
                 </h2>
@@ -299,7 +299,7 @@ export default function Home() {
 
             {/* Volunteering Section */}
             {activeTab === 'volunteering' && (
-              <div className="mb-6 animate-fade-in">
+              <div className="mb-6 animate-fluid-entry">
                 <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-4 uppercase tracking-wider">
                   <HeartHandshake size={14} className="text-sky-400" /> Peer & Social Volunteering
                 </h2>
@@ -321,7 +321,7 @@ export default function Home() {
 
             {/* Academic Profile Track */}
             {activeTab === 'education' && (
-              <div className="mb-6 animate-fade-in">
+              <div className="mb-6 animate-fluid-entry">
                 <h2 className="text-xs font-bold flex items-center gap-2 text-sky-400 mb-3 uppercase tracking-wider">
                   Education Status
                 </h2>
@@ -360,7 +360,7 @@ export default function Home() {
         {/* Messaging Container Track */}
         <div className="flex-1 p-6 overflow-y-auto space-y-4 custom-scrollbar">
           {messages.map((msg, index) => (
-            <div key={index} className={`flex gap-3 max-w-[85%] ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}>
+            <div key={index} className={`flex gap-3 max-w-[85%] animate-bubble-entry ${msg.role === 'user' ? 'ml-auto flex-row-reverse' : ''}`}>
               <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-xs ${
                 msg.role === 'user'
                   ? 'bg-slate-950/80 text-slate-200 border border-slate-800'
@@ -380,7 +380,7 @@ export default function Home() {
 
           {/* Computing Feedback State */}
           {isLoading && (
-            <div className="flex gap-3 max-w-[85%]">
+            <div className="flex gap-3 max-w-[85%] animate-bubble-entry">
               <div className="w-7 h-7 rounded-full bg-slate-950/80 border border-slate-800 flex items-center justify-center text-sky-400">
                 <Bot size={13} />
               </div>
@@ -391,29 +391,24 @@ export default function Home() {
               </div>
             </div>
           )}
-          {/* --- SUGGESTED QUESTIONS PILLS --- */}
-{messages.length === 1 && !isLoading && (
-  <div className="flex flex-wrap gap-2 pt-2 animate-bubble-entry delay-300">
-    {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
-      <button
-        key={idx}
-        onClick={async () => {
-          // 1. Pop the question text into the input field text box
-          setInput(item.question);
           
-          // 2. Give React a split millisecond to update state, then fire your message handler
-          setTimeout(() => {
-            const simulatedEvent = { preventDefault: () => {} } as React.FormEvent;
-            handleSendMessage(simulatedEvent);
-          }, 50);
-        }}
-        className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 text-sky-400/80 rounded-full transition-all text-left cursor-pointer"
-      >
-        {item.question}
-      </button>
-    ))}
-  </div>
-)}
+          {/* Suggested questions*/}
+          {messages.length === 1 && !isLoading && (
+            <div className="flex flex-wrap gap-2 pt-2 animate-bubble-entry delay-300">
+              {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={async () => {
+                    await sendMessage(item.question);
+                  }}
+                  className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 text-sky-400/80 rounded-full transition-all text-left cursor-pointer"
+                >
+                  {item.question}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div ref={chatEndRef} />
         </div>
