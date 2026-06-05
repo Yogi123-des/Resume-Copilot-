@@ -377,7 +377,7 @@ export default function Home() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={isListening ? "Listening closely..." : "Ask about Physics projects, Quantum Counting, Unity, or comedy..."}
+              placeholder={isListening ? "Listening closely..." : "Ask about Physics projects, Game Development, Academic expieriences or comedy..."}
               disabled={isListening}
               className="flex-1 p-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder-slate-500 rounded-xl text-xs focus:outline-none focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/30 disabled:opacity-50 transition-all"
             />
