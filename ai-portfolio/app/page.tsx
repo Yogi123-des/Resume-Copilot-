@@ -138,16 +138,16 @@ export default function Home() {
 
   return (
     // Changed main background from slate-950 to zinc-950 (neutral dark) and text glow selection to indigo
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col md:flex-row antialiased font-sans selection:bg-indigo-500/30">
+    <main className="min-h-screen bg-stone-950 text-zinc-100 flex flex-col md:flex-row antialiased font-sans selection:bg-indigo-500/30">
       
       {/* ================= LEFT PROFILE GRID ================= */}
       {/* Updated border color to modern zinc-800 framework */}
-      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-zinc-800/60 custom-scrollbar md:h-screen flex flex-col justify-between">
+      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-stone-800/60 custom-scrollbar md:h-screen flex flex-col justify-between">
         <div>
           {/* Main Context Card Header */}
           <div className="mb-10 animate-fade-in">
             {/* Swapped badge background and text colors to Indigo */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-400 text-xs font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-500/10 border border-stone-500/20 rounded-full text-stone-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
