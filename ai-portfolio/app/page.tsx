@@ -150,7 +150,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-stone-500/10 border border-amber-500/20 rounded-full text-orange-400 text-xs font-medium mb-4">
               <Sparkles size={12} /> Yogesh's Resume
             </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-white via-stone-200 to-stone-400 bg-clip-text text-transparent">
               {profileData.about.name}
             </h1>
             {/* Sub-header colored to Indigo */}
