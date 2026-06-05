@@ -246,7 +246,7 @@ export default function Home() {
 
           {/* Work & Leadership Experience */}
           <div className="mb-10">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-orange-400 mb-4 uppercase tracking-wider">
+            <h2 className="text-xs font-bold flex items-center gap-2 text-stone-400 mb-4 uppercase tracking-wider">
               <GraduationCap size={14} className="text-orange-400" /> Work & Leadership Experience
             </h2>
             <div className="space-y-4">
