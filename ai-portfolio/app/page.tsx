@@ -13,7 +13,7 @@ interface Message {
 }
 
 export default function Home() {
-  // --- APPLICATION MEMORY (REACT STATE) ---
+  
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'assistant', 
@@ -23,16 +23,16 @@ export default function Home() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
-
-  // Auto-scroller logic
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<BlobPart[]>([]);
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // --- COMPILING UNIQUE JSON PATTERNS SAFELY ---
+  
   const parsedSkills = profileData.skills[0]
     ? profileData.skills[0].split(',').map(skill => skill.trim())
     : [];
@@ -71,40 +71,68 @@ export default function Home() {
     }
   ];
 
-  // --- BROWSER AUDIO SYSTEM (WEB SPEECH API) ---
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        const rec = new SpeechRecognition();
-        rec.continuous = false;
-        rec.interimResults = false;
-        rec.lang = 'en-US';
 
-        rec.onresult = (event: any) => {
-          const transcript = event.results[0][0].transcript;
-          setInput(transcript);
-          setIsListening(false);
-        };
-        rec.onerror = () => setIsListening(false);
-        rec.onend = () => setIsListening(false);
 
-        recognitionRef.current = rec;
-      }
-    }
-  }, []);
-
-  const toggleListening = () => {
-    if (!recognitionRef.current) {
-      alert("Voice recognition is not supported or initialized in this browser.");
+const toggleListening = async () => {
+    // IF WE ARE ALREADY LISTENING, STOP RECORDING
+    if (isListening && mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
       return;
     }
-    if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
-    } else {
+
+    // OTHERWISE, START RECORDING
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = async () => {
+        setIsListening(false);
+        setIsTranscribing(true); // Show user we are processing
+
+        // Safely determine file extension based on browser
+        const mimeType = mediaRecorder.mimeType || 'audio/webm';
+        const ext = mimeType.includes('mp4') ? 'mp4' : mimeType.includes('ogg') ? 'ogg' : 'webm';
+        
+        const audioBlob = new Blob(audioChunksRef.current, { type: mimeType });
+        const formData = new FormData();
+        formData.append('file', audioBlob, `voice.${ext}`);
+
+        try {
+          const response = await fetch('/api/transcribe', {
+            method: 'POST',
+            body: formData,
+          });
+
+          const data = await response.json();
+
+          if (response.ok && data.text) {
+            setInput(data.text); // Drop the text into your input box
+          } else {
+            console.error("Transcription failed:", data.error);
+          }
+        } catch (error) {
+          console.error("Failed to send audio to backend:", error);
+        } finally {
+          setIsTranscribing(false);
+          // Turn off the red recording light on the browser tab
+          stream.getTracks().forEach(track => track.stop());
+        }
+      };
+
+      // Start recording and collect data every 500ms
+      mediaRecorder.start(500);
       setIsListening(true);
-      recognitionRef.current.start();
+    } catch (error) {
+      console.error("Microphone access denied:", error);
+      alert("Please allow microphone access to use voice input.");
     }
   };
 
@@ -137,10 +165,10 @@ export default function Home() {
   };
 
   return (
-    // Transformed global background from stone to cool, soothing slate dark tones
+    
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-sky-500/20">
       
-      {/* ================= LEFT PROFILE GRID ================= */}
+      {/*LEFT PROFILE GRID*/}
       <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-between bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
         <div>
           {/* Main Context Card Header */}
@@ -301,7 +329,7 @@ export default function Home() {
         <p className="text-[10px] text-slate-500 font-mono mt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
       </section>
 
-      {/* ================= RIGHT INTERACTIVE AGENT ================= */}
+      {/* RIGHT INTERACTIVE AGENT */}
       <section className="w-full md:w-1/2 flex flex-col bg-slate-900/60 md:h-screen">
         
         {/* Banner Status Frame */}
@@ -363,12 +391,15 @@ export default function Home() {
             <button
               type="button"
               onClick={toggleListening}
+              disabled={isTranscribing}
               className={`p-3 rounded-xl border transition-all shrink-0 ${
                 isListening 
                   ? 'bg-red-500/20 text-red-400 border-red-500 animate-pulse' 
+                  : isTranscribing
+                  ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500 opacity-50 cursor-wait'
                   : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700'
               }`}
-              title={isListening ? "Mute Microphone" : "Dictate Prompt Input"}
+              title={isListening ? "Stop & Transcribe" : "Dictate Prompt Input"}
             >
               {isListening ? <MicOff size={16} /> : <Mic size={16} />}
             </button>
@@ -377,8 +408,8 @@ export default function Home() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={isListening ? "Listening closely..." : "Ask about Physics projects, Game Development, Academic expieriences or comedy..."}
-              disabled={isListening}
+              placeholder={isTranscribing ? "Transcribing..." : isListening ? "Listening closely..." : "Ask about Physics projects, Game Development, Academic experiences or comedy..."}
+              disabled={isListening || isTranscribing}
               className="flex-1 p-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder-slate-500 rounded-xl text-xs focus:outline-none focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/30 disabled:opacity-50 transition-all"
             />
 
