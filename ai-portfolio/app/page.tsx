@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import profileData from '../profile.json';
 import { 
   Mic, MicOff, Send, Briefcase, GraduationCap, 
-  Code, MailIcon, PhoneIcon, User, Bot, Sparkles, HeartHandshake 
+  Code, MailIcon, PhoneIcon, User, Bot, Sparkles, HeartHandshake, Loader2 
 } from 'lucide-react';
 
 interface Message {
@@ -22,10 +22,16 @@ export default function Home() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Voice states
   const [isListening, setIsListening] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
 
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const recognitionRef = useRef<any>(null);
+  
+  // Replace SpeechRecognition with MediaRecorder refs
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<BlobPart[]>([]);
 
   // Auto-scroller logic
   useEffect(() => {
@@ -71,40 +77,70 @@ export default function Home() {
     }
   ];
 
-  // --- BROWSER AUDIO SYSTEM (WEB SPEECH API) ---
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-      if (SpeechRecognition) {
-        const rec = new SpeechRecognition();
-        rec.continuous = false;
-        rec.interimResults = false;
-        rec.lang = 'en-US';
+  // --- CROSS-BROWSER AUDIO SYSTEM (MediaRecorder + Whisper API) ---
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
 
-        rec.onresult = (event: any) => {
-          const transcript = event.results[0][0].transcript;
-          setInput(transcript);
-          setIsListening(false);
-        };
-        rec.onerror = () => setIsListening(false);
-        rec.onend = () => setIsListening(false);
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
 
-        recognitionRef.current = rec;
-      }
+      mediaRecorder.start();
+      setIsListening(true);
+    } catch (error) {
+      console.error("Microphone access denied or unavailable:", error);
+      alert("Please allow microphone access to use voice input.");
     }
-  }, []);
+  };
+
+  const stopRecording = () => {
+    const mediaRecorder = mediaRecorderRef.current;
+    if (!mediaRecorder) return;
+
+    mediaRecorder.onstop = async () => {
+      setIsListening(false);
+      setIsTranscribing(true);
+
+      const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+      const formData = new FormData();
+      formData.append('file', audioBlob, 'voice-memo.webm');
+
+      try {
+        const response = await fetch('/api/transcribe', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.text) {
+          setInput(data.text);
+        } else {
+          console.error("Transcription error:", data.error);
+        }
+      } catch (error) {
+        console.error("Failed to process audio:", error);
+      } finally {
+        setIsTranscribing(false);
+        // Turn off the microphone hardware light
+        mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      }
+    };
+
+    mediaRecorder.stop();
+  };
 
   const toggleListening = () => {
-    if (!recognitionRef.current) {
-      alert("Voice recognition is not supported or initialized in this browser.");
-      return;
-    }
     if (isListening) {
-      recognitionRef.current.stop();
-      setIsListening(false);
+      stopRecording();
     } else {
-      setIsListening(true);
-      recognitionRef.current.start();
+      startRecording();
     }
   };
 
@@ -137,7 +173,6 @@ export default function Home() {
   };
 
   return (
-    // Transformed global background from stone to cool, soothing slate dark tones
     <main className="min-h-screen bg-slate-900 text-slate-100 flex flex-col md:flex-row antialiased font-sans selection:bg-sky-500/20">
       
       {/* ================= LEFT PROFILE GRID ================= */}
@@ -249,11 +284,9 @@ export default function Home() {
               {compiledExperience.map((exp, idx) => (
                 <div key={idx} className="border-l-2 border-slate-700 pl-4 py-0.5 ml-1">
                   <div className="flex justify-between items-baseline flex-wrap gap-1">
-                    {/* Headings and subheadings now use absolute pristine white layout */}
                     <h3 className="font-semibold text-white text-sm">
                       {exp.role} <span className="text-white font-normal">at {exp.source}</span>
                     </h3>
-                    {/* Timeline positions flipped uniformly to white */}
                     <span className="text-xs font-mono text-white font-medium">{exp.duration}</span>
                   </div>
                   <ul className="list-disc list-inside text-slate-300 text-xs mt-2 space-y-1 pl-0.5">
@@ -363,28 +396,31 @@ export default function Home() {
             <button
               type="button"
               onClick={toggleListening}
-              className={`p-3 rounded-xl border transition-all shrink-0 ${
+              disabled={isTranscribing}
+              className={`p-3 rounded-xl border transition-all shrink-0 flex items-center justify-center ${
                 isListening 
                   ? 'bg-red-500/20 text-red-400 border-red-500 animate-pulse' 
+                  : isTranscribing
+                  ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500 cursor-wait'
                   : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700'
               }`}
-              title={isListening ? "Mute Microphone" : "Dictate Prompt Input"}
+              title={isListening ? "Stop & Send Audio" : "Dictate Prompt Input"}
             >
-              {isListening ? <MicOff size={16} /> : <Mic size={16} />}
+              {isTranscribing ? <Loader2 size={16} className="animate-spin" /> : isListening ? <MicOff size={16} /> : <Mic size={16} />}
             </button>
 
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={isListening ? "Listening closely..." : "Ask about Physics projects, Game Development, Academic expieriences or comedy..."}
-              disabled={isListening}
+              placeholder={isTranscribing ? "Transcribing your audio..." : isListening ? "Listening closely... (Click Mic to stop)" : "Ask about Physics projects, Game Development, Academic experiences or comedy..."}
+              disabled={isListening || isTranscribing}
               className="flex-1 p-3 bg-slate-950/60 border border-slate-800 text-slate-100 placeholder-slate-500 rounded-xl text-xs focus:outline-none focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/30 disabled:opacity-50 transition-all"
             />
 
             <button
               type="submit"
-              disabled={!input.trim() || isLoading}
+              disabled={!input.trim() || isLoading || isListening || isTranscribing}
               className="p-3 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:hover:bg-indigo-600 text-white rounded-xl transition-all shadow-lg flex items-center justify-center shrink-0"
             >
               <Send size={16} />
