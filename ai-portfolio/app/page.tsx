@@ -154,8 +154,8 @@ export default function Home() {
               {profileData.about.name}
             </h1>
             {/* Sub-header colored to Indigo */}
-            <p className="text-lg text-indigo-400 mt-2 font-medium leading-normal">{profileData.about.role}</p>
-            <p className="text-zinc-400 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
+            <p className="text-lg text-orange-400 mt-2 font-medium leading-normal">{profileData.about.role}</p>
+            <p className="text-stone-400 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
             {/* Contact Grid Section */}
             <div className="flex flex-col gap-2 mt-6 max-w-md">
