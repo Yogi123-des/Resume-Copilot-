@@ -246,19 +246,19 @@ export default function Home() {
 
           {/* Work & Leadership Experience */}
           <div className="mb-10">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-zinc-400 mb-4 uppercase tracking-wider">
-              <GraduationCap size={14} className="text-indigo-400" /> Work & Leadership Experience
+            <h2 className="text-xs font-bold flex items-center gap-2 text-stone-400 mb-4 uppercase tracking-wider">
+              <GraduationCap size={14} className="text-orange-400" /> Work & Leadership Experience
             </h2>
             <div className="space-y-4">
               {compiledExperience.map((exp, idx) => (
-                <div key={idx} className="border-l-2 border-zinc-800 pl-4 py-0.5 ml-1">
+                <div key={idx} className="border-l-2 border-amber-800 pl-4 py-0.5 ml-1">
                   <div className="flex justify-between items-baseline flex-wrap gap-1">
                     <h3 className="font-semibold text-white text-sm">
-                      {exp.role} <span className="text-zinc-500 font-normal">at {exp.source}</span>
+                      {exp.role} <span className="text-orange-500 font-normal">at {exp.source}</span>
                     </h3>
-                    <span className="text-xs font-mono text-zinc-500">{exp.duration}</span>
+                    <span className="text-xs font-mono text-orange-500">{exp.duration}</span>
                   </div>
-                  <ul className="list-disc list-inside text-zinc-400 text-xs mt-2 space-y-1 pl-0.5">
+                  <ul className="list-disc list-inside text-orange-400 text-xs mt-2 space-y-1 pl-0.5">
                     {exp.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
                   </ul>
                 </div>
@@ -268,18 +268,18 @@ export default function Home() {
 
           {/* Volunteering Section */}
           <div className="mb-6">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-zinc-400 mb-4 uppercase tracking-wider">
-              <HeartHandshake size={14} className="text-indigo-400" /> Peer & Social Volunteering
+            <h2 className="text-xs font-bold flex items-center gap-2 text-orange-400 mb-4 uppercase tracking-wider">
+              <HeartHandshake size={14} className="text-orange-400" /> Peer & Social Volunteering
             </h2>
             {profileData["volunteering experience"].map((vol, idx) => (
-              <div key={idx} className="border-l-2 border-zinc-800 pl-4 py-0.5 ml-1">
+              <div key={idx} className="border-l-2 border-amber-800 pl-4 py-0.5 ml-1">
                 <div className="flex justify-between items-baseline flex-wrap gap-1">
                   <h3 className="font-semibold text-white text-sm">
-                    {vol.role} <span className="text-zinc-500 font-normal">for {(vol as any).Organisation}</span>
+                    {vol.role} <span className="text-orange-500 font-normal">for {(vol as any).Organisation}</span>
                   </h3>
-                  <span className="text-xs font-mono text-zinc-500">{vol.duration}</span>
+                  <span className="text-xs font-mono text-stone-500">{vol.duration}</span>
                 </div>
-                <ul className="list-disc list-inside text-zinc-400 text-xs mt-2 pl-0.5">
+                <ul className="list-disc list-inside text-orange-400 text-xs mt-2 pl-0.5">
                   {vol.highlights.map((bullet, i) => <li key={i}>{bullet}</li>)}
                 </ul>
               </div>
@@ -287,20 +287,20 @@ export default function Home() {
           </div>
 
           {/* Academic Profile Track */}
-          <div className="mb-6 pt-4 border-t border-zinc-900">
-            <h2 className="text-xs font-bold flex items-center gap-2 text-zinc-400 mb-3 uppercase tracking-wider">
+          <div className="mb-6 pt-4 border-t border-amber-900">
+            <h2 className="text-xs font-bold flex items-center gap-2 text-orange-400 mb-3 uppercase tracking-wider">
               Education Status
             </h2>
             {profileData.education.map((edu, idx) => (
               <div key={idx} className="text-xs">
-                <p className="font-semibold text-zinc-200">{edu.degree}</p>
-                <p className="text-zinc-500 mt-0.5">{edu.institution} | {edu.year}</p>
+                <p className="font-semibold text-orange-200">{edu.degree}</p>
+                <p className="text-orange-500 mt-0.5">{edu.institution} | {edu.year}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="text-[10px] text-zinc-600 font-mono mt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
+        <p className="text-[10px] text-orange-600 font-mono mt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
       </section>
 
       {/* ================= RIGHT INTERACTIVE AGENT ================= */}
