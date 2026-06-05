@@ -146,7 +146,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white">
               {profileData.about.name}
             </h1>
-            <p className="text-lg text-sky-400 mt-2 font-medium leading-normal">{profileData.about.role}</p>
+            <p className="text-lg text-sky-500 mt-2 font-medium leading-normal">{profileData.about.role}</p>
             <p className="text-slate-300 mt-4 leading-relaxed max-w-xl text-sm">{profileData.about.summary}</p>
             
             {/* Contact Grid Section */}
