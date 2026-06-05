@@ -282,7 +282,7 @@ export default function Home() {
 
       {/* LEFT PROFILE GRID */}
 
-      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-between bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
+      <section className="w-full md:w-1/2 p-6 md:p-12 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-800 custom-scrollbar md:h-screen flex flex-col justify-start bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-950">
 
         <div>
 
@@ -534,8 +534,7 @@ export default function Home() {
 
 
 
-        <p className="text-[10px] text-slate-500 font-mono mt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
-
+        <p className="text-[10px] text-slate-500 font-mono mt-auto pt-8">© {new Date().getFullYear()} Yogesh Kumar Saxena — BITS Goa Compiler Mode</p>
       </section>
 
 
