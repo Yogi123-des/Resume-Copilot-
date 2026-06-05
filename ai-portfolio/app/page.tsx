@@ -104,14 +104,16 @@ export default function Home() {
     }
   };
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (textToSend?: string) => {
+    const targetMessage = textToSend || input.trim();
+    if (!targetMessage || isLoading) return;
 
-    const userMessage = input.trim();
-    setInput('');
     
-    const updatedMessages: Message[] = [...messages, { role: 'user', content: userMessage }];
+    if (!textToSend) {
+      setInput('');
+    }
+    
+    const updatedMessages: Message[] = [...messages, { role: 'user', content: targetMessage }];
     setMessages(updatedMessages);
     setIsLoading(true);
 
@@ -130,6 +132,11 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await sendMessage();
   };
 
   return (
@@ -386,15 +393,16 @@ export default function Home() {
           )}
           {messages.length === 1 && !isLoading && profileData?.sampleQ && (
 <div className="flex flex-wrap gap-2 pt-2 animate-fade-in">
-    {profileData.sampleQ.map((item, idx) => (
+    {((profileData as any).sampleQA || (profileData as any).sampleQ || []).map((item: any, idx: number) => (
       <button
         key={idx}
-        onClick={() => setInput(item.question)}
+        onClick={() => sendMessage(item.question)}
         className="text-xs px-3 py-1.5 bg-slate-950/60 border border-slate-800 hover:border-sky-500/40 hover:bg-sky-500/5 text-sky-400/80 hover:text-sky-300 rounded-full transition-all text-left shadow-sm"
       >
         {item.question}
       </button>
     ))}
+   
   </div>
 )}
           <div ref={chatEndRef} />
