@@ -162,10 +162,7 @@ export default function Home() {
                   <MailIcon size={16} className="text-sky-400" />
                   <span>{profileData.contact.email || "saxenayogesh459@gmail.com"}</span>
                </div>
-               <div className="flex items-center gap-2 px-4 py-2 bg-slate-950/40 border border-slate-800 rounded-lg text-slate-300 text-sm cursor-default">
-                  <PhoneIcon size={16} className="text-sky-400" />
-                  <span>{profileData.contact.phone || "+91 7017362735"}</span>
-               </div>
+               
                <div className="flex gap-2 w-full">
                   <a
                     href={profileData.contact.github}
