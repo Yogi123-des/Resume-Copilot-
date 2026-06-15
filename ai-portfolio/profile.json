@@ -23,10 +23,10 @@
   ],
   "project 2": [
     {
-        "title": "Quantum Particle in a 2D box",
-        "description": "A simulation for an electron (or similar particle) in a 2D Box. It plots a preset given wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle. it also plots parametric curve of Δ x and Δ p as the wavefunction changes.",
+        "title": "Quantum Particle in a 1D boundary",
+        "description": "A simulation for an electron (or similar particle) in a 1D Boundary. It plots a preset given wavefunction against itself in its fourier basis and verifies Heisenberg's uncertainity principle. it also plots parametric curve of Δ x and Δ p as the wavefunction changes.",
         "techStack": "Numpy, Scipy and matplotlib (Python)",
-        "GitHub Link": "https://github.com/Yogi123-des/Quantum-Particle-in-a-Box"
+        "liveLink": "https://github.com/Yogi123-des/Quantum-Particle-in-a-Box"
     }
   ],
   "project 3": [
@@ -34,7 +34,7 @@
         "title": "Quantum Counting using Grover's algorithm and Quantum Phase Estimation",
         "description": "This project implements the Quantum Counting algorithm, combining Grover's Search with Quantum Phase Estimation to statistically estimate the number of marked items in a database.",
         "techStack": "Numpy and QISKIT (Python)",
-        "GitHub Link": "https://github.com/Yogi123-des/Quantum-Counting-using-Grover-s-Algorithm-and-Quantum-Phase-Estimation"
+        "liveLink": "https://github.com/Yogi123-des/Quantum-Counting-using-Grover-s-Algorithm-and-Quantum-Phase-Estimation"
     }
   ],
   "project 4":[
